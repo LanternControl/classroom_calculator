@@ -28,6 +28,7 @@ def assignment_average_score(grade_hash, assignment_num)
   grade_hash.map do |name, assignment|
 
     #why do I have to put average after =
+    #2nd edit, because you're setting the first one as a var disphit
     average = average + assignment[assignment_num-1]
   end
   average = average / grade_hash.length
@@ -37,6 +38,9 @@ end
 # TIP: To convert an array like [[:indiana, 90], [:nevada, 80]] to a hash,
 # use .to_h. Also look at Hash#transform_values.
 def averages(grade_hash)
+  grade_hash.transform_values do |scores|
+    list_average(scores)
+  end
 end
 
 # Return a letter grade for a numerical score.
@@ -73,6 +77,11 @@ end
 # Return a hash of students and their final letter grade, as determined
 # by their average.
 def final_letter_grades(grade_hash)
+  avs = averages(grade_hash).map do |key, value|
+    value = letter_grade(value)
+    [key,value]
+   end
+   avs.to_h
 end
 
 # Return the average for the entire class.
@@ -85,4 +94,8 @@ end
 
 # Return an array of the top `number_of_students` students.
 def top_students(grade_hash, number_of_students)
+  averages(grade_hash)
+    .to_a
+    .sort_by { |student| -student[1] }
+    .map { |student| student[0] }
 end
