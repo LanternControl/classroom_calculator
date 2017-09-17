@@ -5,8 +5,7 @@ def assignment_score(grade_hash, student, assignment_num)
   new_array = []
   new_array = grade_hash[student]
   [assignment_num-1]
-end
-  score
+
 end
 
 # Given a grade_hash and assignment number, return all scores for that
@@ -38,9 +37,7 @@ end
 # TIP: To convert an array like [[:indiana, 90], [:nevada, 80]] to a hash,
 # use .to_h. Also look at Hash#transform_values.
 def averages(grade_hash)
-  grade_hash.transform_values do |scores|
-    list_average(scores)
-  end
+  grade_hash.transform_values {|x| x.reduce(0,:+)/(x.length)}
 end
 
 # Return a letter grade for a numerical score.
