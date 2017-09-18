@@ -2,9 +2,7 @@
 # for that student and assignment. Note that Ruby counts arrays from 0, but
 # we are referring to them as 1-10.
 def assignment_score(grade_hash, student, assignment_num)
-  new_array = []
-  new_array = grade_hash[student]
-  [assignment_num-1]
+  grade_hash[student][assignment_num-1]
 
 end
 
@@ -92,7 +90,7 @@ end
 # Return an array of the top `number_of_students` students.
 def top_students(grade_hash, number_of_students)
   averages(grade_hash)
-    .to_a
-    .sort_by { |student| -student[1] }
-    .map { |student| student[0] }
+      .to_a
+      .sort_by { |student| -student[1] }
+      .map { |student| student[0] }
 end
